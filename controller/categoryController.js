@@ -4,10 +4,10 @@ const { categoryCollection } = require("../database/databaseConnection");
 async function getCategory(req, res, next) {
   try {
     const query = {};
-    // const appointmentOption = await appointmentOptions.find(query).toArray();
+    const allcategories = await categoryCollection.find(query).toArray();
     res.send({
       success: true,
-      //   data: appointmentOption,
+        data: allcategories,
     });
   } catch (err) {
     res.send({

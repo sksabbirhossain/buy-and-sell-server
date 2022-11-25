@@ -3,6 +3,7 @@ const cors = require("cors");
 
 const { dbConnect } = require("./database/databaseConnection");
 const categoryRouter = require("./router/categoryRouter");
+const productRouter = require("./router/productRouter");
 
 const app = express();
 app.use(cors());
@@ -13,8 +14,8 @@ const port = process.env.PORT || 5000;
 dbConnect();
 
 //route setup
-
 app.use("/api", categoryRouter);
+app.use("/api", productRouter);
 
 //listen server
 app.listen(port, () => {
