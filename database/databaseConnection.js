@@ -16,10 +16,12 @@ async function dbConnect() {
 const categoryCollection = clint.db("buyandsell").collection("categories");
 const productCollection = clint.db("buyandsell").collection("products");
 const usersCollection = clint.db("buyandsell").collection("users");
+const bookingsCollection = clint.db("buyandsell").collection("bookings");
 
 module.exports = {
   dbConnect,
   categoryCollection,
   productCollection,
   usersCollection,
+  bookingsCollection,
 };
