@@ -15,9 +15,11 @@ async function dbConnect() {
 // create collections
 const categoryCollection = clint.db("buyandsell").collection("categories");
 const productCollection = clint.db("buyandsell").collection("products");
+const usersCollection = clint.db("buyandsell").collection("users");
 
 module.exports = {
   dbConnect,
   categoryCollection,
-  productCollection
+  productCollection,
+  usersCollection,
 };
