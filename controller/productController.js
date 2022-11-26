@@ -1,3 +1,4 @@
+const { ObjectId } = require("mongodb");
 const { productCollection } = require("../database/databaseConnection");
 
 //get products by categoryid
@@ -57,8 +58,30 @@ async function addProduct(req, res, next) {
   }
 }
 
+//delete product
+async function deleteProduct(req, res, next) {
+  try {
+    const id = req.params.id;
+    console.log(id)
+    const query = {
+      _id: ObjectId(id),
+    };
+    const product = await productCollection.deleteOne(query);
+    res.send({
+      success: true,
+      message: "Product Delete successfull",
+    });
+  } catch (err) {
+    res.send({
+      success: false,
+      error: err.message,
+    });
+  }
+}
+
 module.exports = {
   addProduct,
   getProduct,
   getMyProduct,
+  deleteProduct
 };
