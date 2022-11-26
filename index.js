@@ -7,6 +7,7 @@ const productRouter = require("./router/productRouter");
 const userRouter = require("./router/userRouter");
 const bookingsRouter = require("./router/bookingsRouter");
 const buyerRouter = require("./router/buyerRouter");
+const sellerRouter = require("./router/sellerRouter")
 
 const app = express();
 app.use(cors());
@@ -22,6 +23,7 @@ app.use("/api", productRouter);
 app.use("/api", userRouter);
 app.use("/api", bookingsRouter);
 app.use("/api", buyerRouter);
+app.use("/api", sellerRouter);
 
 //listen server
 app.listen(port, () => {
