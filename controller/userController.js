@@ -1,10 +1,10 @@
 const { usersCollection } = require("../database/databaseConnection");
 
-//create user
-async function addUser(req, res, next) {
+//get user
+async function getUsers(req, res, next) {
   try {
-    const data = req.body;
-    const users = await usersCollection.insertOne(data);
+    const query = {};
+    const users = await usersCollection.find(query).toArray();
     res.send({
       success: true,
       data: users,
@@ -17,6 +17,24 @@ async function addUser(req, res, next) {
   }
 }
 
+//create user
+async function addUser(req, res, next) {
+  try {
+    const data = req.body;
+    const user = await usersCollection.insertOne(data);
+    res.send({
+      success: true,
+      data: user,
+    });
+  } catch (err) {
+    res.send({
+      success: false,
+      error: err.message,
+    });
+  }
+}
+
 module.exports = {
   addUser,
+  getUsers,
 };
