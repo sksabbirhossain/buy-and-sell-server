@@ -7,6 +7,7 @@ async function getProduct(req, res, next) {
   try {
     const query = {
       categoryId: id,
+      status: "available",
     };
     const products = await productCollection.find(query).toArray();
     res.send({
@@ -62,7 +63,7 @@ async function addProduct(req, res, next) {
 async function deleteProduct(req, res, next) {
   try {
     const id = req.params.id;
-    console.log(id)
+    console.log(id);
     const query = {
       _id: ObjectId(id),
     };
@@ -83,5 +84,5 @@ module.exports = {
   addProduct,
   getProduct,
   getMyProduct,
-  deleteProduct
+  deleteProduct,
 };

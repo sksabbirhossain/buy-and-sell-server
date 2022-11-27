@@ -1,25 +1,24 @@
 const {
-  advertiseCollection,
+  reportCollection,
   productCollection,
 } = require("../database/databaseConnection");
-const { addProduct } = require("./productController");
 
-//get Advertise
-async function getAdvertise(req, res, next) {
+//get report products
+async function getReportProduct(req, res, next) {
   try {
     const query = {
       status: "available",
     };
     const products = await productCollection.find(query).toArray();
-    const advertises = await advertiseCollection.find({}).toArray();
-    let adProducts = [];
-    advertises.map((ad) => {
+    const reportProduct = await reportCollection.find({}).toArray();
+    let reportedProducts = [];
+    reportProduct.map((ad) => {
       const product = products.filter((product) => product._id == ad.productId);
-      adProducts.push(...product);
+      reportedProducts.push(...product);
     });
     res.send({
       success: true,
-      data: adProducts,
+      data: reportedProducts,
     });
   } catch (err) {
     res.send({
@@ -29,14 +28,14 @@ async function getAdvertise(req, res, next) {
   }
 }
 
-//post a asvertise
-async function addAdvertise(req, res, next) {
+//add report to admin
+async function addReportProduct(req, res, next) {
   try {
     const data = req.body;
-    const advertise = await advertiseCollection.insertOne(data);
+    const report = await reportCollection.insertOne(data);
     res.send({
       success: true,
-      data: advertise,
+      data: report,
     });
   } catch (err) {
     res.send({
@@ -47,6 +46,6 @@ async function addAdvertise(req, res, next) {
 }
 
 module.exports = {
-  addAdvertise,
-  getAdvertise,
+    addReportProduct,
+  getReportProduct,
 };

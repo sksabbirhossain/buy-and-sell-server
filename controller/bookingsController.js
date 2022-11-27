@@ -2,8 +2,11 @@ const { bookingsCollection } = require("../database/databaseConnection");
 
 //get bookings
 async function getBookings(req, res, next) {
+  const email = req.params.email;
   try {
-    const query = {};
+    const query = {
+      userEmail: email,
+    };
     const allBookings = await bookingsCollection.find(query).toArray();
     res.send({
       success: true,

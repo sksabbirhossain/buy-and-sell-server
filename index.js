@@ -9,6 +9,7 @@ const bookingsRouter = require("./router/bookingsRouter");
 const buyerRouter = require("./router/buyerRouter");
 const sellerRouter = require("./router/sellerRouter");
 const adRouter = require("./router/adRouter");
+const reportRouter = require("./router/reportRouter");
 
 const app = express();
 app.use(cors());
@@ -26,6 +27,7 @@ app.use("/api", bookingsRouter);
 app.use("/api", buyerRouter);
 app.use("/api", sellerRouter);
 app.use("/api", adRouter);
+app.use("/api", reportRouter);
 
 //listen server
 app.listen(port, () => {
