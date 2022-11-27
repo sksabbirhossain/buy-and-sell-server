@@ -1,6 +1,7 @@
+const { ObjectId } = require("mongodb");
 const { usersCollection } = require("../database/databaseConnection");
 
-//get all buyers
+//get all seller
 async function getsellers(req, res, next) {
   try {
     const query = {
@@ -19,6 +20,33 @@ async function getsellers(req, res, next) {
   }
 }
 
+//verify seller
+async function updateVerifySeller(req, res, next) {
+  const id = req.params.id;
+  try {
+    const query = {
+      _id: ObjectId(id),
+    };
+
+    const updateDoc = {
+      $set: {
+        verified: true,
+      },
+    };
+    const products = await usersCollection.updateOne(query, updateDoc);
+    res.send({
+      success: true,
+      message: "seller verify successfull",
+    });
+  } catch (err) {
+    res.send({
+      success: false,
+      error: err.message,
+    });
+  }
+}
+
 module.exports = {
   getsellers,
+  updateVerifySeller,
 };
