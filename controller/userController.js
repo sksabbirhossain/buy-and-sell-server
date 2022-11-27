@@ -1,5 +1,8 @@
 const { ObjectId } = require("mongodb");
-const { usersCollection } = require("../database/databaseConnection");
+const {
+  usersCollection,
+  productCollection,
+} = require("../database/databaseConnection");
 
 //get user
 async function getUsers(req, res, next) {
@@ -39,10 +42,15 @@ async function addUser(req, res, next) {
 async function deleteUser(req, res, nex) {
   try {
     const id = req.params.id;
-    const query = {
+    const email = req.query.email;
+    const forUser = {
       _id: ObjectId(id),
     };
-    const user = await usersCollection.deleteOne(query);
+    const forProduct = {
+      userEmail: email,
+    };
+    const user = await usersCollection.deleteOne(forUser);
+    const product = await productCollection.deleteOne(forProduct);
     res.send({
       success: true,
       message: "User Delete successfull",
