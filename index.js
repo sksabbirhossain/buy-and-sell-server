@@ -1,5 +1,7 @@
 const express = require("express");
 const cors = require("cors");
+require("dotenv").config();
+const stripe = require("stripe")(process.env.STRIPE_SECRET);
 
 const { dbConnect } = require("./database/databaseConnection");
 const categoryRouter = require("./router/categoryRouter");
@@ -10,6 +12,7 @@ const buyerRouter = require("./router/buyerRouter");
 const sellerRouter = require("./router/sellerRouter");
 const adRouter = require("./router/adRouter");
 const reportRouter = require("./router/reportRouter");
+const paymentRouter = require("./router/paymentRouter")
 
 const app = express();
 app.use(cors());
@@ -28,6 +31,7 @@ app.use("/api", buyerRouter);
 app.use("/api", sellerRouter);
 app.use("/api", adRouter);
 app.use("/api", reportRouter);
+app.use("/api", paymentRouter);
 
 //listen server
 app.listen(port, () => {

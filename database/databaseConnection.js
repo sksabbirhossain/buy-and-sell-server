@@ -19,6 +19,7 @@ const usersCollection = clint.db("buyandsell").collection("users");
 const bookingsCollection = clint.db("buyandsell").collection("bookings");
 const advertiseCollection = clint.db("buyandsell").collection("advertises");
 const reportCollection = clint.db("buyandsell").collection("reportProducts");
+const paymentCollection = clint.db("buyandsell").collection("payments");
 
 module.exports = {
   dbConnect,
@@ -28,4 +29,5 @@ module.exports = {
   bookingsCollection,
   advertiseCollection,
   reportCollection,
+  paymentCollection,
 };

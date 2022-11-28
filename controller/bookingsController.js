@@ -1,3 +1,4 @@
+const { ObjectId } = require("mongodb");
 const { bookingsCollection } = require("../database/databaseConnection");
 
 //get bookings
@@ -11,6 +12,25 @@ async function getBookings(req, res, next) {
     res.send({
       success: true,
       data: allBookings,
+    });
+  } catch (err) {
+    res.send({
+      success: false,
+      error: err.message,
+    });
+  }
+}
+//get bookings by orderID
+async function getBookingByRoderId(req, res, next) {
+  const id = req.params.id;
+  try {
+    const query = {
+      _id: ObjectId(id),
+    };
+    const allBooking = await bookingsCollection.find(query).toArray();
+    res.send({
+      success: true,
+      data: allBooking,
     });
   } catch (err) {
     res.send({
@@ -40,4 +60,5 @@ async function addBooking(req, res, next) {
 module.exports = {
   addBooking,
   getBookings,
+  getBookingByRoderId,
 };
